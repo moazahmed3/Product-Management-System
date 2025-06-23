@@ -18,36 +18,67 @@ if (localStorage.getItem("products") != null) {
 }
 
 function isValidInput(name, price, category, desc) {
-  if (!productNameRexExp.test(name)) {
-    document.getElementById("productNameAlert").classList.remove("d-none");
-  } else {
-    document.getElementById("productNameAlert").classList.add("d-none");
-  }
-
-  if (!productPriceRexExp.test(price)) {
-    document.getElementById("productPriceAlert").classList.remove("d-none");
-  } else {
-    document.getElementById("productPriceAlert").classList.add("d-none");
-  }
-
-  if (!productCategoryRexExp.test(category)) {
-    document.getElementById("productCategoryAlert").classList.remove("d-none");
-  } else {
-    document.getElementById("productCategoryAlert").classList.add("d-none");
-  }
-
-  if (!productDescRexExp.test(desc)) {
-    document.getElementById("productDescAlert").classList.remove("d-none");
-  } else {
-    document.getElementById("productDescAlert").classList.add("d-none");
-  }
-
   return (
     productNameRexExp.test(name) &&
     productPriceRexExp.test(price) &&
     productCategoryRexExp.test(category) &&
     productDescRexExp.test(desc)
   );
+}
+
+function validInputName() {
+  if (productNameRexExp.test(productNameInput.value)) {
+    productNameInput.classList.add("is-valid");
+    productNameInput.classList.remove("is-invalid");
+    document.getElementById("productNameAlert").classList.remove("d-black");
+    document.getElementById("productNameAlert").classList.add("d-none");
+  } else {
+    productNameInput.classList.remove("is-valid");
+    productNameInput.classList.add("is-invalid");
+    document.getElementById("productNameAlert").classList.add("d-black");
+    document.getElementById("productNameAlert").classList.remove("d-none");
+  }
+}
+
+function validInputPrice() {
+  if (productPriceRexExp.test(productPriceInput.value)) {
+    productPriceInput.classList.add("is-valid");
+    productPriceInput.classList.remove("is-invalid");
+    document.getElementById("productPriceAlert").classList.remove("d-black");
+    document.getElementById("productPriceAlert").classList.add("d-none");
+  } else {
+    productPriceInput.classList.remove("is-valid");
+    productPriceInput.classList.add("is-invalid");
+    document.getElementById("productPriceAlert").classList.add("d-black");
+    document.getElementById("productPriceAlert").classList.remove("d-none");
+  }
+}
+
+function validInputCategory() {
+  if (productCategoryRexExp.test(productCategoryInput.value)) {
+    productCategoryInput.classList.add("is-valid");
+    productCategoryInput.classList.remove("is-invalid");
+    document.getElementById("productCategoryAlert").classList.remove("d-black");
+    document.getElementById("productCategoryAlert").classList.add("d-none");
+  } else {
+    productCategoryInput.classList.remove("is-valid");
+    productCategoryInput.classList.add("is-invalid");
+    document.getElementById("productCategoryAlert").classList.add("d-black");
+    document.getElementById("productCategoryAlert").classList.remove("d-none");
+  }
+}
+function validInputDescription() {
+  if (productDescRexExp.test(productDescInput.value)) {
+    productDescInput.classList.add("is-valid");
+    productDescInput.classList.remove("is-invalid");
+    document.getElementById("productDescAlert").classList.remove("d-black");
+    document.getElementById("productDescAlert").classList.add("d-none");
+  } else {
+    productDescInput.classList.remove("is-valid");
+    productDescInput.classList.add("is-invalid");
+    document.getElementById("productDescAlert").classList.add("d-black");
+    document.getElementById("productDescAlert").classList.remove("d-none");
+  }
 }
 
 function addProduct() {
@@ -75,6 +106,7 @@ function addProduct() {
     localStorage.setItem("products", JSON.stringify(productsArr));
     displayProducts();
     clearInputs();
+    clearValidation();
   }
 }
 
@@ -119,6 +151,23 @@ function clearInputs() {
   productPriceInput.value = "";
   productCategoryInput.value = "";
   productDescInput.value = "";
+}
+function clearValidation() {
+  productNameInput.classList.remove("is-valid", "is-invalid");
+  document.getElementById("productNameAlert").classList.add("d-none");
+  document.getElementById("productNameAlert").classList.remove("d-black");
+
+  productPriceInput.classList.remove("is-valid", "is-invalid");
+  document.getElementById("productPriceAlert").classList.add("d-none");
+  document.getElementById("productPriceAlert").classList.remove("d-black");
+
+  productCategoryInput.classList.remove("is-valid", "is-invalid");
+  document.getElementById("productCategoryAlert").classList.add("d-none");
+  document.getElementById("productCategoryAlert").classList.remove("d-black");
+
+  productDescInput.classList.remove("is-valid", "is-invalid");
+  document.getElementById("productDescAlert").classList.add("d-none");
+  document.getElementById("productDescAlert").classList.remove("d-black");
 }
 
 function search() {
